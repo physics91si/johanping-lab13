@@ -6,21 +6,29 @@
 
 import unittest
 import calc
+import re
 
 class CalcTest(unittest.TestCase):
     # TODO implement tests here to verify that your functions work!
     def testAddition(self):
-        self.assertEqual(calc.calc('1+1'), 2)
+        self.assertEqual(calc.calc(re.search("\d+\d",s),2))
 
     def testSubtraction(self):
-        pass
+        self.assertEqual(calc.calc('1-1'), 0)
 
     def testMultiplciation(self):
-        pass
+        self.assertEqual(calc.calc('1*5'), 5)
  
     def testDivision(self):
-        pass
+        self.assertEqual(calc.calc('10/2'), 5)
 
-if __name__ == '__main__':
+    def testSyntax(self):
+        with self.assertRaises(SyntaxError):
+            calc.calc('+1+1')
+            
+    def testType(self):
+        with self.assertRaises(TypeError):
+            calc.calc('string')
+        
+if __name__ == '__main__': 
     unittest.main()
-
